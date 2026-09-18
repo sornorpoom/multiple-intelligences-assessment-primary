@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบประเมินพหุปัญญาออนไลน์ ประถมศึกษาตอนปลาย | สำนักงานเลขาธิการสภาการศึกษา</title>
+  
+  <!-- Google Fonts: Prompt & Sarabun -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Sarabun:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Sarabun', 'sans-serif'],
+            prompt: ['Prompt', 'sans-serif'],
+          },
+          colors: {
+            primary: '#2563EB',
+            secondary: '#7C3AED',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- html2pdf.js for Client-side PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+
+  <!-- Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="handleHomeNavigation()" title="คลิกเพื่อกลับหน้าแรก">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm hover:opacity-90 transition">
+          <i class="fa-solid fa-brain text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-prompt font-bold text-base md:text-lg text-slate-900 leading-tight">
+            ระบบประเมินพหุปัญญา ประถมศึกษาตอนปลาย
+          </h1>
+          <p class="text-xs text-slate-500">
+            สำนักงานเลขาธิการสภาการศึกษา (9 ด้าน 45 ข้อคำถาม)
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <!-- Home Button -->
+        <button id="btn-nav-home" class="text-xs font-semibold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-pointer" title="กลับสู่หน้าหลักของระบบ">
+          <i class="fa-solid fa-house"></i>
+          <span>หน้าหลัก (Home)</span>
+        </button>
+        <!-- Stop Button (Visible during quiz) -->
+        <button id="btn-header-stop" class="hidden text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg border border-red-200 transition flex items-center gap-1.5 cursor-pointer" title="หยุดทำแบบประเมินและกลับหน้าแรก">
+          <i class="fa-solid fa-circle-stop"></i>
+          <span>หยุด (Stop)</span>
+        </button>
+        <!-- Demo Button -->
+        <button id="btn-load-demo" class="text-xs font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition flex items-center gap-1.5 cursor-pointer" title="โหลดข้อมูลผลตัวอย่างเพื่อทดสอบระบบทันที">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          <span class="hidden sm:inline">ดูตัวอย่างผลลัพธ์</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 md:py-8">
+
+    <!-- ================= SCREEN 1: WELCOME & REGISTRATION ================= -->
+    <div id="welcome-screen" class="space-y-6">
+      <!-- Hero Banner -->
+      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 rounded-3xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="max-w-3xl relative z-10">
+          <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium tracking-wide mb-3">
+            แบบประเมินตนเองตามมาตรฐาน สกศ.
+          </span>
+          <h2 class="font-prompt text-2xl sm:text-4xl font-bold mb-3 leading-tight">
+            สำรวจศักยภาพและความถนัดเฉพาะตัว ผ่าน 9 ด้านพหุปัญญา
+          </h2>
+          <p class="text-blue-100 text-sm sm:text-base leading-relaxed mb-6">
+            แบบประเมินนี้ประกอบด้วยสถานการณ์จำลอง 45 ข้อ เพื่อช่วยให้นักเรียนได้สำรวจความสนใจ ความถนัด และค้นพบจุดแข็งของตนเอง เพื่อเป็นแนวทางในการวางแผนการเรียนและพัฒนาทักษะชีวิต
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
+              <div class="font-prompt font-bold text-xl sm:text-2xl">9 ด้าน</div>
+              <div class="text-xs text-blue-200">ครอบคลุมทุกมิติ</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
+              <div class="font-prompt font-bold text-xl sm:text-2xl">45 ข้อ</div>
+              <div class="text-xs text-blue-200">สถานการณ์จำลอง</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
+              <div class="font-prompt font-bold text-xl sm:text-2xl">5 ระดับ</div>
+              <div class="text-xs text-blue-200">เกณฑ์การพัฒนา</div>
+            </div>
+            <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
+              <div class="font-prompt font-bold text-xl sm:text-2xl">PDF</div>
+              <div class="text-xs text-blue-200">ส่งออกรายงานผล</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registration Form & Mode Selection -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Student Info Form -->
+        <div class="lg:col-span-2 bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
+          <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-address-card text-blue-600 text-lg"></i>
+              <h3 class="font-prompt font-bold text-lg text-slate-800">ข้อมูลผู้รับการประเมิน</h3>
+            </div>
+            <button id="btn-reset-all-form" class="text-xs text-slate-500 hover:text-red-600 bg-slate-50 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer" title="ล้างข้อมูลและคำตอบทั้งหมดในระบบ">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>รีเซ็ตข้อมูลทั้งหมด (Reset All)</span>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="sm:col-span-2">
+              <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-fullname">
+                ชื่อ - นามสกุล <span class="text-red-500">*</span>
+              </label>
+              <input type="text" id="input-fullname" placeholder="เช่น เด็กชายสมศักดิ์ ใจดี" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-grade">
+                ระดับชั้น <span class="text-red-500">*</span>
+              </label>
+              <select id="input-grade" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden bg-white">
+                <option value="ประถมศึกษาปีที่ 4 (ป.4)">ประถมศึกษาปีที่ 4 (ป.4)</option>
+                <option value="ประถมศึกษาปีที่ 5 (ป.5)">ประถมศึกษาปีที่ 5 (ป.5)</option>
+                <option value="ประถมศึกษาปีที่ 6 (ป.6)">ประถมศึกษาปีที่ 6 (ป.6)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-student-no">
+                เลขที่
+              </label>
+              <input type="text" id="input-student-no" placeholder="เช่น 15" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-school">
+                โรงเรียน
+              </label>
+              <input type="text" id="input-school" placeholder="ระบุชื่อโรงเรียน" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-date">
+                วันที่ประเมิน
+              </label>
+              <input type="date" id="input-date" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden bg-white">
+            </div>
+          </div>
+
+          <!-- Assessment Mode Selection with Interactive Animation -->
+          <div class="mt-8 border-t border-slate-100 pt-6">
+            <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-3">
+              เลือกรูปแบบการทำแบบประเมิน (คลิกเพื่อเลือก)
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5" id="mode-selection-container">
+              
+              <label class="mode-card active-mode flex items-start gap-3 p-4 rounded-xl" data-mode="all">
+                <input type="radio" name="assessment-mode" value="all" checked class="mt-1 text-blue-600 focus:ring-blue-500">
+                <div>
+                  <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ทำทั้งหมดรวดเดียว (45 ข้อ)</div>
+                  <div class="text-xs text-slate-500 mt-0.5">ครบทั้ง 9 ด้านในครั้งเดียว (แนะนำ)</div>
+                </div>
+              </label>
+
+              <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set1">
+                <input type="radio" name="assessment-mode" value="set1" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <div>
+                  <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 1 (ข้อ 1 - 15)</div>
+                  <div class="text-xs text-slate-500 mt-0.5">ภาษา, ตรรกะคณิตศาสตร์, มิติสัมพันธ์</div>
+                </div>
+              </label>
+
+              <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set2">
+                <input type="radio" name="assessment-mode" value="set2" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <div>
+                  <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 2 (ข้อ 16 - 30)</div>
+                  <div class="text-xs text-slate-500 mt-0.5">ดนตรี, รอบรู้ธรรมชาติ, ร่างกาย</div>
+                </div>
+              </label>
+
+              <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set3">
+                <input type="radio" name="assessment-mode" value="set3" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <div>
+                  <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 3 (ข้อ 31 - 45)</div>
+                  <div class="text-xs text-slate-500 mt-0.5">เข้าใจผู้อื่น, เข้าใจตนเอง, ดำรงชีวิต</div>
+                </div>
+              </label>
+
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <button id="btn-start-assessment" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-prompt font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-base cursor-pointer">
+              <span>เริ่มทำแบบประเมิน</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Instructions Sidebar -->
+        <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-2 mb-4 pb-2 border-b border-slate-100">
+              <i class="fa-solid fa-circle-info text-indigo-600"></i>
+              <h4 class="font-prompt font-bold text-slate-800 text-base">คำชี้แจงในการทำ</h4>
+            </div>
+            <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                <span>ไม่มีคำตอบที่ถูกหรือผิด ให้นักเรียนเลือกตัวเลือกที่<strong>ตรงกับความเป็นจริงของตนเองมากที่สุด</strong></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                <span>หากพบว่าตนเองยังไม่เคยแสดงพฤติกรรมตามตัวเลือกที่กำหนด ให้เลือกตัวเลือก <strong>"ไม่สามารถประเมินได้"</strong></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                <span>สามารถ<strong>ล้างคำตอบรายข้อ</strong>, <strong>รีเซ็ตรายด้าน</strong> หรือ<strong>รีเซ็ตภาพรวม</strong> ได้ตลอดเวลา</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                <span>ผลการประเมินจะสรุปเป็นกราฟใยแมงมุม กราฟแท่ง และสามารถพิมพ์หรือบันทึกเป็น PDF ได้ทันที</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Reference & Verification Box -->
+          <div class="mt-6 p-4 bg-blue-50/80 rounded-xl border border-blue-100">
+            <div class="flex items-start gap-2.5">
+              <i class="fa-solid fa-book-bookmark text-blue-600 text-sm mt-0.5"></i>
+              <div class="text-xs text-slate-700 leading-relaxed">
+                <span class="font-bold text-slate-900 block mb-1">การตรวจสอบความถูกต้องและเอกสารอ้างอิง:</span>
+                ให้ตรวจสอบความถูกต้องจากเอกสารเรื่อง <strong>"รายงานรายการตัวชี้วัดการติดตามประเมินผลการจัดการศึกษาที่สอดคล้องกับการพัฒนาศักยภาพตามพหุปัญญา"</strong>
+                <div class="mt-2">
+                  <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-blue-700 hover:text-blue-900 font-bold hover:underline bg-white px-3 py-1.5 rounded-lg border border-blue-200 shadow-2xs transition">
+                    <i class="fa-solid fa-download text-xs text-blue-600"></i>
+                    <span>ลิงก์ดาวน์โหลดเอกสาร (สกศ. เล่ม 1958)</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5 text-slate-400"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ================= SCREEN 2: QUIZ INTERFACE ================= -->
+    <div id="quiz-screen" class="hidden space-y-6">
+      <!-- Progress Bar & Dimension Badge & Actions -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <div id="quiz-dimension-badge">
+              <!-- Dynamic Badge -->
+            </div>
+            <!-- Reset Current Dimension Button -->
+            <button id="btn-reset-dimension" class="text-xs text-amber-700 hover:text-amber-800 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-full border border-amber-200 transition flex items-center gap-1 cursor-pointer" title="ล้างคำตอบเฉพาะ 5 ข้อในด้านนี้">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>รีเซ็ตเฉพาะด้านนี้</span>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <div class="text-xs font-semibold text-slate-600" id="quiz-progress-text">
+              ตอบแล้ว 0 / 45 ข้อ (0%)
+            </div>
+            <!-- Reset All Quiz Answers Button -->
+            <button id="btn-reset-all-quiz" class="text-xs font-semibold text-slate-600 hover:text-red-600 bg-slate-100 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer" title="ล้างคำตอบทั้งหมด">
+              <i class="fa-solid fa-trash-can"></i>
+              <span class="hidden sm:inline">รีเซ็ตทั้งหมด</span>
+            </button>
+            <!-- Stop Button -->
+            <button id="btn-quiz-stop" class="text-xs font-semibold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-1.5 rounded-lg border border-red-200 transition flex items-center gap-1.5 cursor-pointer" title="หยุดทำแบบประเมินและกลับหน้าแรก">
+              <i class="fa-solid fa-circle-stop"></i>
+              <span>หยุด (Stop)</span>
+            </button>
+          </div>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+          <div id="quiz-progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Question Box -->
+      <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
+        <div class="flex items-center justify-between mb-4">
+          <span id="quiz-question-number" class="font-prompt font-bold text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-lg">
+            ข้อที่ 1 จาก 45 ข้อ
+          </span>
+          <!-- Reset Current Question Button -->
+          <button id="btn-clear-current-q" class="text-xs text-slate-500 hover:text-red-600 bg-slate-50 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" title="ยกเลิกคำตอบในข้อนี้">
+            <i class="fa-solid fa-eraser text-slate-400"></i>
+            <span>ล้างคำตอบข้อนี้ (Clear)</span>
+          </button>
+        </div>
+
+        <h3 id="quiz-scenario" class="font-prompt text-base sm:text-lg font-medium text-slate-800 leading-relaxed mb-6">
+          <!-- Scenario Question Text -->
+        </h3>
+
+        <!-- 5 Options Container -->
+        <div id="quiz-options-container" class="space-y-3">
+          <!-- Dynamically Rendered Radio Cards -->
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center justify-between mt-8 pt-6 border-t border-slate-100">
+          <button id="btn-prev-question" class="px-4 sm:px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 font-prompt font-semibold text-sm transition flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>ข้อก่อนหน้า</span>
+          </button>
+
+          <button id="btn-next-question" class="px-5 sm:px-7 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-prompt font-semibold text-sm rounded-xl shadow-xs hover:shadow-md transition flex items-center gap-2 cursor-pointer">
+            <span>ข้อถัดไป</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <button id="btn-submit-assessment" class="hidden px-6 sm:px-8 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-prompt font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-check"></i>
+            <span>ส่งแบบประเมินและดูผลลัพธ์</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Question Quick Navigation Grid -->
+      <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <h4 class="font-prompt font-bold text-xs text-slate-600 uppercase tracking-wider">
+            ผังข้อคำถามทั้งหมด (คลิกเพื่อข้ามข้อ)
+          </h4>
+          <span class="text-[11px] text-slate-400">เขียว = ตอบแล้ว | น้ำเงิน = ข้อปัจจุบัน | เทา = ยังไม่ตอบ</span>
+        </div>
+        <div id="question-nav-grid" class="flex flex-wrap gap-2">
+          <!-- 1 - 45 Question Number Badges -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ================= SCREEN 3: RESULTS & ANALYTICS DASHBOARD ================= -->
+    <div id="results-screen" class="hidden space-y-6">
+      
+      <!-- Action Toolbar (Download PDF / Print / Home / Retest) -->
+      <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl shadow-xs border border-slate-200 no-print">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-prompt font-bold text-sm text-slate-800">ผลการประเมินประมวลผลสำเร็จ</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="btn-home-from-results" class="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-house"></i>
+            <span>หน้าแรก (Home)</span>
+          </button>
+          <button id="btn-edit-answers" class="px-3 py-2 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>แก้ไขคำตอบ</span>
+          </button>
+          <button id="btn-print-report" class="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-print"></i>
+            <span>พิมพ์รายงาน</span>
+          </button>
+          <button id="btn-download-pdf" class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs hover:shadow-md transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>ดาวน์โหลด PDF</span>
+          </button>
+          <button id="btn-retest" class="px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-lg border border-red-200 transition flex items-center gap-1.5 cursor-pointer">
+            <i class="fa-solid fa-arrow-rotate-right"></i>
+            <span>รีเซ็ต & ทำใหม่</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Report Root Container -->
+      <div id="report-printable-area" class="space-y-6">
+
+        <!-- Student Summary Header Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+            <div>
+              <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
+                ผลการประเมินรายบุคคล
+              </span>
+              <h2 id="res-student-name" class="font-prompt text-2xl font-bold text-slate-900 mt-1">
+                เด็กหญิงมณีรัตน์ ใจดี
+              </h2>
+              <p id="res-student-meta" class="text-xs text-slate-500 mt-1">
+                ชั้น ป.5 เลขที่ 8 | โรงเรียนสาธิตประถมศึกษา | วันที่ประเมิน: 18 กันยายน 2569
+              </p>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 text-center min-w-[100px]">
+                <div class="text-[11px] font-semibold text-blue-600">คะแนนเฉลี่ย</div>
+                <div id="res-overall-pct" class="font-prompt font-bold text-xl text-blue-700">0%</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center min-w-[100px]">
+                <div class="text-[11px] font-semibold text-slate-500">ตอบครบ</div>
+                <div id="res-answered-count" class="font-prompt font-bold text-xl text-slate-700">45 / 45</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overall Alert -->
+          <div id="res-status-alert" class="mt-4">
+            <!-- Dynamic Alert -->
+          </div>
+        </div>
+
+        <!-- Charts Dashboard (Radar + Bar Chart) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Radar Chart Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-prompt font-bold text-base text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-chart-pie text-blue-600"></i>
+                  <span>แผนภูมิใยแมงมุม (Radar Chart)</span>
+                </h3>
+              </div>
+              <p class="text-xs text-slate-500 mb-4">แสดงภาพรวมความสมดุลและการกระจายตัวของพหุปัญญาทั้ง 9 ด้าน</p>
+            </div>
+            
+            <div class="chart-container">
+              <canvas id="radar-chart-canvas"></canvas>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
+              <span class="inline-block w-2.5 h-2.5 bg-blue-600 rounded-full mr-1"></span>
+              ผังแสดงขอบเขตศักยภาพ 9 มิติของผู้เรียน
+            </div>
+          </div>
+
+          <!-- Bar Chart Card -->
+          <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-prompt font-bold text-base text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-chart-column text-indigo-600"></i>
+                  <span>แผนภูมิแท่งเปรียบเทียบ (Bar Chart)</span>
+                </h3>
+              </div>
+              <p class="text-xs text-slate-500 mb-4">เปรียบเทียบคะแนนร้อยละและระดับความสามารถแต่ละด้าน</p>
+            </div>
+            
+            <div class="chart-container">
+              <canvas id="bar-chart-canvas"></canvas>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-center gap-4 text-[11px] text-slate-500">
+              <span>ระดับ 1 (0-29%)</span>
+              <span>ระดับ 2 (30-75%)</span>
+              <span>ระดับ 3 (76-83%)</span>
+              <span>ระดับ 4 (84-100%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top 3 Strengths Highlights -->
+        <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-star text-amber-500 text-lg"></i>
+            <h3 class="font-prompt font-bold text-lg text-slate-800">
+              3 อันดับพหุปัญญาที่มีความโดดเด่นสูงสุด (Top Strengths)
+            </h3>
+          </div>
+          <div id="top-strengths-cards" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Dynamic Strength Cards -->
+          </div>
+        </div>
+
+        <!-- Full 9 Dimensions Breakdown Table -->
+        <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 overflow-hidden">
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-table-list text-blue-600 text-lg"></i>
+            <h3 class="font-prompt font-bold text-lg text-slate-800">
+              ตารางสรุปผลและคำแปลผลรายด้านครบทั้ง 9 ด้าน
+            </h3>
+          </div>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-slate-600 text-xs font-semibold uppercase tracking-wider border-b border-slate-200">
+                  <th class="py-3 px-3 text-center w-12">ที่</th>
+                  <th class="py-3 px-3">ด้านพหุปัญญา</th>
+                  <th class="py-3 px-3 text-center w-28">คะแนนดิบ</th>
+                  <th class="py-3 px-3 text-center w-28">ร้อยละ</th>
+                  <th class="py-3 px-3 text-center w-48">ระดับความสามารถ</th>
+                  <th class="py-3 px-3">คำอธิบายและแนวทางการแปลผล</th>
+                </tr>
+              </thead>
+              <tbody id="dimensions-table-body">
+                <!-- Dynamic Rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ================= POPUP MODAL: CONFIRM STOP ASSESSMENT ================= -->
+  <div id="stop-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-center animate-scale-up">
+      <div class="w-14 h-14 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-4 text-2xl">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+      <h3 class="font-prompt font-bold text-lg text-slate-900 mb-2">
+        ยืนยันการกลับสู่หน้าหลัก (Home)?
+      </h3>
+      <p class="text-sm text-slate-600 leading-relaxed mb-6">
+        คุณต้องการหยุดการทำแบบประเมินและกลับไปที่หน้าหลักหรือไม่?<br>
+        <span class="text-xs text-slate-400">(คำตอบที่คุณทำไว้จะยังคงถูกบันทึกไว้ในเบราว์เซอร์)</span>
+      </p>
+      <div class="flex gap-3">
+        <button id="btn-cancel-stop" class="flex-1 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-prompt font-semibold text-sm hover:bg-slate-50 transition cursor-pointer">
+          ทำต่อ (ยกเลิก)
+        </button>
+        <button id="btn-confirm-stop" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-prompt font-semibold text-sm shadow-sm transition cursor-pointer">
+          กลับหน้าหลัก
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= POPUP MODAL: CONFIRM RESET ACTION ================= -->
+  <div id="reset-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-center animate-scale-up">
+      <div class="w-14 h-14 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center mx-auto mb-4 text-2xl">
+        <i class="fa-solid fa-rotate-left"></i>
+      </div>
+      <h3 id="reset-modal-title" class="font-prompt font-bold text-lg text-slate-900 mb-2">
+        ยืนยันการรีเซ็ตข้อมูล?
+      </h3>
+      <p id="reset-modal-desc" class="text-sm text-slate-600 leading-relaxed mb-6">
+        คุณต้องการล้างข้อมูลใช่หรือไม่?
+      </p>
+      <div class="flex gap-3">
+        <button id="btn-cancel-reset" class="flex-1 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-prompt font-semibold text-sm hover:bg-slate-50 transition cursor-pointer">
+          ยกเลิก
+        </button>
+        <button id="btn-confirm-reset" class="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-prompt font-semibold text-sm shadow-sm transition cursor-pointer">
+          ยืนยันการรีเซ็ต
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print mt-auto">
+    <div class="max-w-6xl mx-auto px-4">
+      <p>ระบบประเมินพหุปัญญาสำหรับนักเรียนระดับประถมศึกษาตอนปลาย (ป.4-ป.6)</p>
+      <p class="mt-1 text-slate-400">พัฒนาตามคู่มือและแบบประเมินของ สำนักงานเลขาธิการสภาการศึกษา กระทรวงศึกษาธิการ | <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ดาวน์โหลดเอกสารอ้างอิง สกศ. (1958)</a></p>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript Modules -->
+  <script src="js/questions-data.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/pdf-export.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
