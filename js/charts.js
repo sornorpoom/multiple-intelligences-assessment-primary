@@ -1,4 +1,4 @@
-﻿/**
+/**
  * โมดูลจัดการกราฟิกและชาร์ต (Radar & Bar Chart) ด้วย Chart.js
  */
 
@@ -29,13 +29,13 @@ class MICharts {
         datasets: [{
           label: 'คะแนนร้อยละ (%)',
           data: dataValues,
-          backgroundColor: 'rgba(59, 130, 246, 0.25)',
-          borderColor: '#2563EB',
+          backgroundColor: 'rgba(16, 185, 129, 0.25)',
+          borderColor: '#059669',
           borderWidth: 2.5,
           pointBackgroundColor: dimensionResults.map(d => d.dimension.color),
           pointBorderColor: '#ffffff',
           pointHoverBackgroundColor: '#ffffff',
-          pointHoverBorderColor: '#2563EB',
+          pointHoverBorderColor: '#059669',
           pointRadius: 5,
           pointHoverRadius: 7
         }]

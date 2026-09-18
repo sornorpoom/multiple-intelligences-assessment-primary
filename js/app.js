@@ -550,9 +550,9 @@ function showResults() {
       <p class="text-sm">${narrative.summaryText}</p>
     `;
   } else {
-    alertContainer.className = 'p-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 mb-6';
+    alertContainer.className = 'p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 mb-6';
     alertContainer.innerHTML = `
-      <div class="flex items-center gap-2 font-bold mb-1 text-blue-800">
+      <div class="flex items-center gap-2 font-bold mb-1 text-emerald-800">
         <i class="fa-solid fa-circle-check"></i> สรุปผลการประเมินศักยภาพ
       </div>
       <p class="text-sm">${narrative.summaryText}</p>

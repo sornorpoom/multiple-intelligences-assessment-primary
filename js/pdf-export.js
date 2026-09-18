@@ -59,8 +59,8 @@ class MIPDFExport {
       <div id="pdf-report-container" style="font-family: 'Sarabun', 'Prompt', sans-serif; color: #1e293b; background: #ffffff; padding: 24px; max-width: 800px; margin: 0 auto; line-height: 1.45;">
         
         <!-- Header -->
-        <div style="text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 12px; margin-bottom: 16px;">
-          <h1 style="font-family: 'Prompt', sans-serif; font-size: 20px; font-weight: bold; color: #1e3a8a; margin: 0 0 4px 0;">
+        <div style="text-align: center; border-bottom: 2px solid #059669; padding-bottom: 12px; margin-bottom: 16px;">
+          <h1 style="font-family: 'Prompt', sans-serif; font-size: 20px; font-weight: bold; color: #065f46; margin: 0 0 4px 0;">
             รายงานผลการประเมินพหุปัญญา (Multiple Intelligences Report)
           </h1>
           <p style="font-size: 13px; color: #475569; margin: 0;">
@@ -88,7 +88,7 @@ class MIPDFExport {
         </div>
 
         <!-- Score Summary Table -->
-        <h3 style="font-family: 'Prompt', sans-serif; font-size: 15px; color: #1e3a8a; margin: 0 0 8px 0; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+        <h3 style="font-family: 'Prompt', sans-serif; font-size: 15px; color: #065f46; margin: 0 0 8px 0; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
           📊 ตารางสรุปผลคะแนนรายด้าน 9 ด้าน
         </h3>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; border: 1px solid #e2e8f0;">
@@ -109,7 +109,7 @@ class MIPDFExport {
         <!-- Page break for cleaner print layout if needed -->
         <div style="page-break-inside: avoid;">
           <!-- Top Strengths & Guidance -->
-          <h3 style="font-family: 'Prompt', sans-serif; font-size: 15px; color: #1e3a8a; margin: 0 0 8px 0; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
+          <h3 style="font-family: 'Prompt', sans-serif; font-size: 15px; color: #065f46; margin: 0 0 8px 0; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px;">
             🌟 การวิเคราะห์จุดเด่นและแนวทางพัฒนาศักยภาพ
           </h3>
           <div style="margin-bottom: 16px;">
@@ -146,7 +146,7 @@ class MIPDFExport {
     tempDiv.innerHTML = reportHtml;
     document.body.appendChild(tempDiv);
 
-    const filename = `รายงานพหุปัญญา_${studentInfo.fullName || 'นักเรียน'}_${new Date().toISOString().slice(0,10)}.pdf`;
+    const filename = `รายงานพหุปัญญา_ประถมปลาย_${studentInfo.fullName || 'นักเรียน'}_${new Date().toISOString().slice(0,10)}.pdf`;
 
     const opt = {
       margin: [10, 10, 10, 10],

@@ -24,8 +24,8 @@
             prompt: ['Prompt', 'sans-serif'],
           },
           colors: {
-            primary: '#2563EB',
-            secondary: '#7C3AED',
+            primary: '#059669',
+            secondary: '#0D9488',
           }
         }
       }
@@ -41,13 +41,13 @@
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-slate-50 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
+<body class="bg-slate-50 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
 
   <!-- Navigation Bar -->
   <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-xs no-print">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
       <div class="flex items-center gap-3 cursor-pointer" onclick="handleHomeNavigation()" title="คลิกเพื่อกลับหน้าแรก">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm hover:opacity-90 transition">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-600 flex items-center justify-center text-white shadow-sm hover:opacity-90 transition">
           <i class="fa-solid fa-brain text-xl"></i>
         </div>
         <div>
@@ -61,7 +61,7 @@
       </div>
       <div class="flex items-center gap-2">
         <!-- Home Button -->
-        <button id="btn-nav-home" class="text-xs font-semibold text-slate-700 hover:text-blue-600 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-pointer" title="กลับสู่หน้าหลักของระบบ">
+        <button id="btn-nav-home" class="text-xs font-semibold text-slate-700 hover:text-emerald-600 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1.5 cursor-pointer" title="กลับสู่หน้าหลักของระบบ">
           <i class="fa-solid fa-house"></i>
           <span>หน้าหลัก (Home)</span>
         </button>
@@ -71,8 +71,8 @@
           <span>หยุด (Stop)</span>
         </button>
         <!-- Demo Button -->
-        <button id="btn-load-demo" class="text-xs font-semibold text-blue-600 hover:text-blue-700 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition flex items-center gap-1.5 cursor-pointer" title="โหลดข้อมูลผลตัวอย่างเพื่อทดสอบระบบทันที">
-          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <button id="btn-load-demo" class="text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 cursor-pointer" title="โหลดข้อมูลผลตัวอย่างเพื่อทดสอบระบบทันที">
+          <i class="fa-solid fa-wand-magic-sparkles text-emerald-600"></i>
           <span class="hidden sm:inline">ดูตัวอย่างผลลัพธ์</span>
         </button>
       </div>
@@ -84,37 +84,37 @@
 
     <!-- ================= SCREEN 1: WELCOME & REGISTRATION ================= -->
     <div id="welcome-screen" class="space-y-6">
-      <!-- Hero Banner -->
-      <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-800 rounded-3xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden">
+      <!-- Hero Banner (Green Theme for Upper Primary) -->
+      <div class="bg-gradient-to-r from-emerald-700 via-teal-700 to-green-800 rounded-3xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden">
         <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl pointer-events-none">
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <div class="max-w-3xl relative z-10">
           <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium tracking-wide mb-3">
-            แบบประเมินตนเองตามมาตรฐาน สกศ.
+            แบบประเมินตนเองตามมาตรฐาน สกศ. (ระดับ ป.4 - ป.6)
           </span>
           <h2 class="font-prompt text-2xl sm:text-4xl font-bold mb-3 leading-tight">
             สำรวจศักยภาพและความถนัดเฉพาะตัว ผ่าน 9 ด้านพหุปัญญา
           </h2>
-          <p class="text-blue-100 text-sm sm:text-base leading-relaxed mb-6">
+          <p class="text-emerald-100 text-sm sm:text-base leading-relaxed mb-6">
             แบบประเมินนี้ประกอบด้วยสถานการณ์จำลอง 45 ข้อ เพื่อช่วยให้นักเรียนได้สำรวจความสนใจ ความถนัด และค้นพบจุดแข็งของตนเอง เพื่อเป็นแนวทางในการวางแผนการเรียนและพัฒนาทักษะชีวิต
           </p>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
               <div class="font-prompt font-bold text-xl sm:text-2xl">9 ด้าน</div>
-              <div class="text-xs text-blue-200">ครอบคลุมทุกมิติ</div>
+              <div class="text-xs text-emerald-200">ครอบคลุมทุกมิติ</div>
             </div>
             <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
               <div class="font-prompt font-bold text-xl sm:text-2xl">45 ข้อ</div>
-              <div class="text-xs text-blue-200">สถานการณ์จำลอง</div>
+              <div class="text-xs text-emerald-200">สถานการณ์จำลอง</div>
             </div>
             <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
               <div class="font-prompt font-bold text-xl sm:text-2xl">5 ระดับ</div>
-              <div class="text-xs text-blue-200">เกณฑ์การพัฒนา</div>
+              <div class="text-xs text-emerald-200">เกณฑ์การพัฒนา</div>
             </div>
             <div class="bg-white/10 backdrop-blur-xs rounded-xl p-3 border border-white/10">
               <div class="font-prompt font-bold text-xl sm:text-2xl">PDF</div>
-              <div class="text-xs text-blue-200">ส่งออกรายงานผล</div>
+              <div class="text-xs text-emerald-200">ส่งออกรายงานผล</div>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@
         <div class="lg:col-span-2 bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
           <div class="flex items-center justify-between mb-6 border-b border-slate-100 pb-4">
             <div class="flex items-center gap-2">
-              <i class="fa-solid fa-address-card text-blue-600 text-lg"></i>
+              <i class="fa-solid fa-address-card text-emerald-600 text-lg"></i>
               <h3 class="font-prompt font-bold text-lg text-slate-800">ข้อมูลผู้รับการประเมิน</h3>
             </div>
             <button id="btn-reset-all-form" class="text-xs text-slate-500 hover:text-red-600 bg-slate-50 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-slate-200 transition flex items-center gap-1 cursor-pointer" title="ล้างข้อมูลและคำตอบทั้งหมดในระบบ">
@@ -140,14 +140,14 @@
               <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-fullname">
                 ชื่อ - นามสกุล <span class="text-red-500">*</span>
               </label>
-              <input type="text" id="input-fullname" placeholder="เช่น เด็กชายสมศักดิ์ ใจดี" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+              <input type="text" id="input-fullname" placeholder="เช่น เด็กชายรักเรียน เพียรศึกษา" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition outline-hidden">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-grade">
                 ระดับชั้น <span class="text-red-500">*</span>
               </label>
-              <select id="input-grade" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden bg-white">
+              <select id="input-grade" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition outline-hidden bg-white">
                 <option value="ประถมศึกษาปีที่ 4 (ป.4)">ประถมศึกษาปีที่ 4 (ป.4)</option>
                 <option value="ประถมศึกษาปีที่ 5 (ป.5)">ประถมศึกษาปีที่ 5 (ป.5)</option>
                 <option value="ประถมศึกษาปีที่ 6 (ป.6)">ประถมศึกษาปีที่ 6 (ป.6)</option>
@@ -158,21 +158,21 @@
               <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-student-no">
                 เลขที่
               </label>
-              <input type="text" id="input-student-no" placeholder="เช่น 15" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+              <input type="text" id="input-student-no" placeholder="เช่น 15" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition outline-hidden">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-school">
                 โรงเรียน
               </label>
-              <input type="text" id="input-school" placeholder="ระบุชื่อโรงเรียน" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden">
+              <input type="text" id="input-school" placeholder="ระบุชื่อโรงเรียน" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition outline-hidden">
             </div>
 
             <div>
               <label class="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5" for="input-date">
                 วันที่ประเมิน
               </label>
-              <input type="date" id="input-date" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm transition outline-hidden bg-white">
+              <input type="date" id="input-date" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm transition outline-hidden bg-white">
             </div>
           </div>
 
@@ -184,7 +184,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5" id="mode-selection-container">
               
               <label class="mode-card active-mode flex items-start gap-3 p-4 rounded-xl" data-mode="all">
-                <input type="radio" name="assessment-mode" value="all" checked class="mt-1 text-blue-600 focus:ring-blue-500">
+                <input type="radio" name="assessment-mode" value="all" checked class="mt-1 text-emerald-600 focus:ring-emerald-500">
                 <div>
                   <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ทำทั้งหมดรวดเดียว (45 ข้อ)</div>
                   <div class="text-xs text-slate-500 mt-0.5">ครบทั้ง 9 ด้านในครั้งเดียว (แนะนำ)</div>
@@ -192,7 +192,7 @@
               </label>
 
               <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set1">
-                <input type="radio" name="assessment-mode" value="set1" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <input type="radio" name="assessment-mode" value="set1" class="mt-1 text-emerald-600 focus:ring-emerald-500">
                 <div>
                   <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 1 (ข้อ 1 - 15)</div>
                   <div class="text-xs text-slate-500 mt-0.5">ภาษา, ตรรกะคณิตศาสตร์, มิติสัมพันธ์</div>
@@ -200,7 +200,7 @@
               </label>
 
               <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set2">
-                <input type="radio" name="assessment-mode" value="set2" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <input type="radio" name="assessment-mode" value="set2" class="mt-1 text-emerald-600 focus:ring-emerald-500">
                 <div>
                   <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 2 (ข้อ 16 - 30)</div>
                   <div class="text-xs text-slate-500 mt-0.5">ดนตรี, รอบรู้ธรรมชาติ, ร่างกาย</div>
@@ -208,7 +208,7 @@
               </label>
 
               <label class="mode-card flex items-start gap-3 p-4 rounded-xl" data-mode="set3">
-                <input type="radio" name="assessment-mode" value="set3" class="mt-1 text-blue-600 focus:ring-blue-500">
+                <input type="radio" name="assessment-mode" value="set3" class="mt-1 text-emerald-600 focus:ring-emerald-500">
                 <div>
                   <div class="font-bold text-slate-800 text-sm font-prompt mode-title">ชุดที่ 3 (ข้อ 31 - 45)</div>
                   <div class="text-xs text-slate-500 mt-0.5">เข้าใจผู้อื่น, เข้าใจตนเอง, ดำรงชีวิต</div>
@@ -219,7 +219,7 @@
           </div>
 
           <div class="mt-8">
-            <button id="btn-start-assessment" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-prompt font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-base cursor-pointer">
+            <button id="btn-start-assessment" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-prompt font-bold rounded-xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-base cursor-pointer">
               <span>เริ่มทำแบบประเมิน</span>
               <i class="fa-solid fa-arrow-right"></i>
             </button>
@@ -230,7 +230,7 @@
         <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 flex flex-col justify-between">
           <div>
             <div class="flex items-center gap-2 mb-4 pb-2 border-b border-slate-100">
-              <i class="fa-solid fa-circle-info text-indigo-600"></i>
+              <i class="fa-solid fa-circle-info text-teal-600"></i>
               <h4 class="font-prompt font-bold text-slate-800 text-base">คำชี้แจงในการทำ</h4>
             </div>
             <ul class="space-y-3 text-xs text-slate-600 leading-relaxed">
@@ -254,15 +254,15 @@
           </div>
 
           <!-- Reference & Verification Box -->
-          <div class="mt-6 p-4 bg-blue-50/80 rounded-xl border border-blue-100">
+          <div class="mt-6 p-4 bg-emerald-50/80 rounded-xl border border-emerald-100">
             <div class="flex items-start gap-2.5">
-              <i class="fa-solid fa-book-bookmark text-blue-600 text-sm mt-0.5"></i>
+              <i class="fa-solid fa-book-bookmark text-emerald-600 text-sm mt-0.5"></i>
               <div class="text-xs text-slate-700 leading-relaxed">
                 <span class="font-bold text-slate-900 block mb-1">การตรวจสอบความถูกต้องและเอกสารอ้างอิง:</span>
                 ให้ตรวจสอบความถูกต้องจากเอกสารเรื่อง <strong>"รายงานรายการตัวชี้วัดการติดตามประเมินผลการจัดการศึกษาที่สอดคล้องกับการพัฒนาศักยภาพตามพหุปัญญา"</strong>
                 <div class="mt-2">
-                  <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-blue-700 hover:text-blue-900 font-bold hover:underline bg-white px-3 py-1.5 rounded-lg border border-blue-200 shadow-2xs transition">
-                    <i class="fa-solid fa-download text-xs text-blue-600"></i>
+                  <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-900 font-bold hover:underline bg-white px-3 py-1.5 rounded-lg border border-emerald-200 shadow-2xs transition">
+                    <i class="fa-solid fa-download text-xs text-emerald-600"></i>
                     <span>ลิงก์ดาวน์โหลดเอกสาร (สกศ. เล่ม 1958)</span>
                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-0.5 text-slate-400"></i>
                   </a>
@@ -308,14 +308,14 @@
           </div>
         </div>
         <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-          <div id="quiz-progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+          <div id="quiz-progress-bar" class="bg-emerald-600 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
         </div>
       </div>
 
       <!-- Question Box -->
       <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-xs border border-slate-200">
         <div class="flex items-center justify-between mb-4">
-          <span id="quiz-question-number" class="font-prompt font-bold text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-lg">
+          <span id="quiz-question-number" class="font-prompt font-bold text-sm text-emerald-700 bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-100">
             ข้อที่ 1 จาก 45 ข้อ
           </span>
           <!-- Reset Current Question Button -->
@@ -341,12 +341,12 @@
             <span>ข้อก่อนหน้า</span>
           </button>
 
-          <button id="btn-next-question" class="px-5 sm:px-7 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-prompt font-semibold text-sm rounded-xl shadow-xs hover:shadow-md transition flex items-center gap-2 cursor-pointer">
+          <button id="btn-next-question" class="px-5 sm:px-7 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-prompt font-semibold text-sm rounded-xl shadow-xs hover:shadow-md transition flex items-center gap-2 cursor-pointer">
             <span>ข้อถัดไป</span>
             <i class="fa-solid fa-arrow-right"></i>
           </button>
 
-          <button id="btn-submit-assessment" class="hidden px-6 sm:px-8 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-prompt font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2 cursor-pointer">
+          <button id="btn-submit-assessment" class="hidden px-6 sm:px-8 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-prompt font-bold text-sm rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-check"></i>
             <span>ส่งแบบประเมินและดูผลลัพธ์</span>
           </button>
@@ -359,7 +359,7 @@
           <h4 class="font-prompt font-bold text-xs text-slate-600 uppercase tracking-wider">
             ผังข้อคำถามทั้งหมด (คลิกเพื่อข้ามข้อ)
           </h4>
-          <span class="text-[11px] text-slate-400">เขียว = ตอบแล้ว | น้ำเงิน = ข้อปัจจุบัน | เทา = ยังไม่ตอบ</span>
+          <span class="text-[11px] text-slate-400">เขียว = ตอบแล้ว | เขียวเข้ม = ข้อปัจจุบัน | เทา = ยังไม่ตอบ</span>
         </div>
         <div id="question-nav-grid" class="flex flex-wrap gap-2">
           <!-- 1 - 45 Question Number Badges -->
@@ -390,7 +390,7 @@
             <i class="fa-solid fa-print"></i>
             <span>พิมพ์รายงาน</span>
           </button>
-          <button id="btn-download-pdf" class="px-4 py-2 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-xs hover:shadow-md transition flex items-center gap-1.5 cursor-pointer">
+          <button id="btn-download-pdf" class="px-4 py-2 text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-xs hover:shadow-md transition flex items-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-file-pdf"></i>
             <span>ดาวน์โหลด PDF</span>
           </button>
@@ -408,8 +408,8 @@
         <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
             <div>
-              <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
-                ผลการประเมินรายบุคคล
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+                ผลการประเมินรายบุคคล (ประถมศึกษาตอนปลาย)
               </span>
               <h2 id="res-student-name" class="font-prompt text-2xl font-bold text-slate-900 mt-1">
                 เด็กหญิงมณีรัตน์ ใจดี
@@ -419,9 +419,9 @@
               </p>
             </div>
             <div class="flex items-center gap-4">
-              <div class="bg-blue-50 border border-blue-100 rounded-xl p-3 text-center min-w-[100px]">
-                <div class="text-[11px] font-semibold text-blue-600">คะแนนเฉลี่ย</div>
-                <div id="res-overall-pct" class="font-prompt font-bold text-xl text-blue-700">0%</div>
+              <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-center min-w-[100px]">
+                <div class="text-[11px] font-semibold text-emerald-700">คะแนนเฉลี่ย</div>
+                <div id="res-overall-pct" class="font-prompt font-bold text-xl text-emerald-800">0%</div>
               </div>
               <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center min-w-[100px]">
                 <div class="text-[11px] font-semibold text-slate-500">ตอบครบ</div>
@@ -443,7 +443,7 @@
             <div>
               <div class="flex items-center justify-between mb-2">
                 <h3 class="font-prompt font-bold text-base text-slate-800 flex items-center gap-2">
-                  <i class="fa-solid fa-chart-pie text-blue-600"></i>
+                  <i class="fa-solid fa-chart-pie text-emerald-600"></i>
                   <span>แผนภูมิใยแมงมุม (Radar Chart)</span>
                 </h3>
               </div>
@@ -455,7 +455,7 @@
             </div>
 
             <div class="mt-4 pt-3 border-t border-slate-100 text-center text-xs text-slate-500">
-              <span class="inline-block w-2.5 h-2.5 bg-blue-600 rounded-full mr-1"></span>
+              <span class="inline-block w-2.5 h-2.5 bg-emerald-600 rounded-full mr-1"></span>
               ผังแสดงขอบเขตศักยภาพ 9 มิติของผู้เรียน
             </div>
           </div>
@@ -465,7 +465,7 @@
             <div>
               <div class="flex items-center justify-between mb-2">
                 <h3 class="font-prompt font-bold text-base text-slate-800 flex items-center gap-2">
-                  <i class="fa-solid fa-chart-column text-indigo-600"></i>
+                  <i class="fa-solid fa-chart-column text-teal-600"></i>
                   <span>แผนภูมิแท่งเปรียบเทียบ (Bar Chart)</span>
                 </h3>
               </div>
@@ -501,7 +501,7 @@
         <!-- Full 9 Dimensions Breakdown Table -->
         <div class="bg-white rounded-2xl p-6 shadow-xs border border-slate-200 overflow-hidden">
           <div class="flex items-center gap-2 mb-4">
-            <i class="fa-solid fa-table-list text-blue-600 text-lg"></i>
+            <i class="fa-solid fa-table-list text-emerald-600 text-lg"></i>
             <h3 class="font-prompt font-bold text-lg text-slate-800">
               ตารางสรุปผลและคำแปลผลรายด้านครบทั้ง 9 ด้าน
             </h3>
@@ -583,7 +583,7 @@
   <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print mt-auto">
     <div class="max-w-6xl mx-auto px-4">
       <p>ระบบประเมินพหุปัญญาสำหรับนักเรียนระดับประถมศึกษาตอนปลาย (ป.4-ป.6)</p>
-      <p class="mt-1 text-slate-400">พัฒนาตามคู่มือและแบบประเมินของ สำนักงานเลขาธิการสภาการศึกษา กระทรวงศึกษาธิการ | <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">ดาวน์โหลดเอกสารอ้างอิง สกศ. (1958)</a></p>
+      <p class="mt-1 text-slate-400">พัฒนาตามคู่มือและแบบประเมินของ สำนักงานเลขาธิการสภาการศึกษา กระทรวงศึกษาธิการ | <a href="https://www.onec.go.th/th.php/book/BookView/1958" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline">ดาวน์โหลดเอกสารอ้างอิง สกศ. (1958)</a></p>
     </div>
   </footer>
 
